@@ -1,0 +1,140 @@
+lib LibRay
+  enum LogType
+    LOG_INFO
+    LOG_WARNING
+    LOG_ERROR
+    LOG_DEBUG
+    LOG_OTHER
+  end
+
+  enum ShaderLocationIndex
+    LOC_VERTEX_POSITION
+    LOC_VERTEX_TEXCOORD01
+    LOC_VERTEX_TEXCOORD02
+    LOC_VERTEX_NORMAL
+    LOC_VERTEX_TANGENT
+    LOC_VERTEX_COLOR
+    LOC_MATRIX_MVP
+    LOC_MATRIX_MODEL
+    LOC_MATRIX_VIEW
+    LOC_MATRIX_PROJECTION
+    LOC_VECTOR_VIEW
+    LOC_COLOR_DIFFUSE
+    LOC_COLOR_SPECULAR
+    LOC_COLOR_AMBIENT
+    LOC_MAP_ALBEDO
+    LOC_MAP_DIFFUSE       = LOC_MAP_ALBEDO
+    LOC_MAP_METALNESS
+    LOC_MAP_SPECULAR      = LOC_MAP_METALNESS
+    LOC_MAP_NORMAL
+    LOC_MAP_ROUGHNESS
+    LOC_MAP_OCCUSION
+    LOC_MAP_EMISSION
+    LOC_MAP_HEIGHT
+    LOC_MAP_CUBEMAP
+    LOC_MAP_IRRADIANCE
+    LOC_MAP_PREFILTER
+    LOC_MAP_BRDF
+  end
+
+  enum TexmapIndex
+    MAP_ALBEDO
+    MAP_DIFFUSE    = MAP_ALBEDO
+    MAP_METALNESS
+    MAP_SPECULAR   = MAP_METALNESS
+    MAP_NORMAL
+    MAP_ROUGHNESS
+    MAP_OCCLUSION
+    MAP_EMISSION
+    MAP_HEIGHT
+    MAP_CUBEMAP
+    MAP_IRRADIANCE
+    MAP_PREFILTER
+    MAP_BRDF
+  end
+
+  enum TextureFormat
+    UNCOMPRESSED_GRAYSCALE   = 1 # 8 bit per pixel (no alpha)
+    UNCOMPRESSED_GRAY_ALPHA      # 16 bpp (2 channels)
+    UNCOMPRESSED_R5G6B5          # 16 bpp
+    UNCOMPRESSED_R8G8B8          # 24 bpp
+    UNCOMPRESSED_R5G5B5A1        # 16 bpp (1 bit alpha)
+    UNCOMPRESSED_R4G4B4A4        # 16 bpp (4 bit alpha)
+    UNCOMPRESSED_R8G8B8A8        # 32 bpp
+    UNCOMPRESSED_R32G32B32       # 32 bit per channel (float) - HDR
+    COMPRESSED_DXT1_RGB          # 4 bpp (no alpha)
+    COMPRESSED_DXT1_RGBA         # 4 bpp (1 bit alpha)
+    COMPRESSED_DXT3_RGBA         # 8 bpp
+    COMPRESSED_DXT5_RGBA         # 8 bpp
+    COMPRESSED_ETC1_RGB          # 4 bpp
+    COMPRESSED_ETC2_RGB          # 4 bpp
+    COMPRESSED_ETC2_EAC_RGBA     # 8 bpp
+    COMPRESSED_PVRT_RGB          # 4 bpp
+    COMPRESSED_PVRT_RGBA         # 4 bpp
+    COMPRESSED_ASTC_4x4_RGBA     # 8 bpp
+    COMPRESSED_ASTC_8x8_RGBA     # 2 bpp
+  end
+
+  enum TextureFilterMode
+    FILTER_POINT
+    FILTER_BILINEAR
+    FILTER_TRILINEAR
+    FILTER_ANISOTROPIC_4X
+    FILTER_ANISOTROPIC_8X
+    FILTER_ANISOTROPIC_16X
+  end
+
+  enum TextureWrapMode
+    WRAP_REPEAT
+    WRAP_CLAMP
+    WRAP_MIRROR
+  end
+
+  enum BlendMode
+    BLEND_ALPHA
+    BLEND_ADDITIVE
+    BLEND_MULTIPLIED
+  end
+
+  enum Gestures
+    GESTURE_NONE        =   0
+    GESTURE_TAP         =   1
+    GESTURE_DOUBLETAP   =   2
+    GESTURE_HOLD        =   4
+    GESTURE_DRAG        =   8
+    GESTURE_SWIPE_RIGHT =  16
+    GESTURE_SWIPE_LEFT  =  32
+    GESTURE_SWIPE_UP    =  64
+    GESTURE_SWIPE_DOWN  = 128
+    GESTURE_PINCH_IN    = 256
+    GESTURE_PINCH_OUT   = 512
+  end
+
+  enum CameraMode
+    CAMERA_CUSTOM
+    CAMERA_FREE
+    CAMERA_ORBITAL
+    CAMERA_FIRST_PERSON
+    CAMERA_THIRD_PERSON
+  end
+
+  enum VrDeviceType
+    HMD_DEFAULT_DEVICE
+    HMD_OCULUS_RIFT_DK2
+    HMD_OCULUS_RIFT_CV1
+    HMD_OCULUS_GO
+    HMD_VALVE_HTC_VIVE
+    HMD_SONY_PSVR
+  end
+
+  enum RRESDataType
+    RRES_TYPE_RAW
+    RRES_TYPE_IMAGE
+    RRES_TYPE_WAVE
+    RRES_TYPE_VERTEX
+    RRES_TYPE_TEXT
+    RRES_TYPE_FONT_IMAGE
+    RRES_TYPE_FONT_CHARDATA # CharInfo data array
+    RRES_TYPE_DIRECTORY
+  end
+end

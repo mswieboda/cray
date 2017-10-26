@@ -16,7 +16,7 @@ dependencies:
 
 Check out the examples in the `examples` directory.
 
-You can run `make` to run all of the examples one after another.
+You can run `make run_examples` to run all of the examples one after another.
 
 The function names are the same as the names in the [cheatsheet](http://www.raylib.com/cheatsheet/cheatsheet.html), with the following differences:
 

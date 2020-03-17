@@ -1,43 +1,36 @@
 all: examples
 
-libraylib.so: raylib
+lib_ext: raylib
+	rm -rf lib_ext; \
+	mkdir -p lib_ext; \
 	cd raylib ;\
 	rm -rf build ;\
 	mkdir -p build ;\
 	cd build ;\
 	cmake -DBUILD_EXAMPLES=OFF -DBUILD_GAMES=OFF -DSHARED_RAYLIB=ON .. ;\
 	make
-	cp raylib/build/release/libraylib.so .
+	cp raylib/build/src/libraylib.* ./lib_ext
 
-libraylib.dylib: raylib
-	cd raylib ;\
-	rm -rf build ;\
-	mkdir -p build ;\
-	cd build ;\
-	cmake -DBUILD_EXAMPLES=OFF -DBUILD_GAMES=OFF -DSHARED_RAYLIB=ON .. ;\
-	make
-	cp raylib/build/src/libraylib.dylib .
-
-example_hello_world: libraylib.dylib examples/hello_world/hello_world.cr
+example_hello_world: lib_ext examples/hello_world/hello_world.cr
 	mkdir -p build-examples
-	env LIBRARY_PATH="$(PWD)" crystal build examples/hello_world/hello_world.cr -o build-examples/hello_world
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world/hello_world.cr -o build-examples/hello_world
 
-example_image_effects: libraylib.dylib examples/image_effects/image_effects.cr
+example_image_effects: lib_ext examples/image_effects/image_effects.cr
 	mkdir -p build-examples
-	env LIBRARY_PATH="$(PWD)" crystal build examples/image_effects/image_effects.cr -o build-examples/image_effects
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/image_effects/image_effects.cr -o build-examples/image_effects
 
-example_input: libraylib.dylib examples/input/input.cr examples/input/circle.png
+example_input: lib_ext examples/input/input.cr examples/input/circle.png
 	mkdir -p build-examples
-	env LIBRARY_PATH="$(PWD)" crystal build examples/input/input.cr -o build-examples/input
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/input/input.cr -o build-examples/input
 
 run_example_hello_world: example_hello_world
-	env LD_LIBRARY_PATH="$(PWD)" build-examples/hello_world
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/hello_world
 
 run_example_image_effects: example_image_effects
-	env LD_LIBRARY_PATH="$(PWD)" build-examples/image_effects
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/image_effects
 
 run_example_input: example_input
-	env LD_LIBRARY_PATH="$(PWD)" build-examples/input
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/input
 
 examples: example_hello_world example_image_effects example_input
 

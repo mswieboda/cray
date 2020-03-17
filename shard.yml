@@ -4,6 +4,6 @@ version: 0.1.0
 authors:
   - Zatherz <zatherz@linux.pl>
 
-crystal: 0.23.1
+crystal: 0.33.0
 
 license: MIT

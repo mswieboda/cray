@@ -6,6 +6,7 @@ lib LibRay
   fun load_image_ex = LoadImageEx(pixels : Color*, width : LibC::Int, height : LibC::Int) : Image
   fun load_image_pro = LoadImagePro(data : Void*, width : LibC::Int, height : LibC::Int, format : LibC::Int) : Image
   fun load_image_raw = LoadImageRaw(filename : LibC::Char*, width : LibC::Int, height : LibC::Int, format : LibC::Int, header_size : LibC::Int) : Image
+  fun export_image = ExportImage(image : Image, filename : LibC::Char*) : Void
   fun load_texture = LoadTexture(filename : LibC::Char*) : Texture2D
   fun load_texture_from_image = LoadTextureFromImage(image : Image) : Texture2D
   fun load_render_texture = LoadRenderTexture(width : LibC::Int, height : LibC::Int) : RenderTexture2D
@@ -14,10 +15,12 @@ lib LibRay
   fun unload_render_texture = UnloadRenderTexture(texture : RenderTexture2D) : Void
   fun get_image_data = GetImageData(image : Image) : Color*               # get pixel data from image as a color struct array
   fun get_texture_data = GetTextureData(texture : Texture2D) : Image      # get pixel data from GPU texture and return an image
+  fun get_screen_data = GetScreenData : Image                             # get pixel data from screen buffer and return an Image (screenshot)
   fun update_texture = UpdateTexture(texture : Texture2D, pixels : Void*) # update gpu texture with new data
-  fun save_image_as = SaveImageAs(filename : LibC::Char*, image : Image) : Void
 
   # image manipulation functions
+  fun image_copy = ImageCopy(image : Image) : Image                             # create an image duplicate (useful for transformations)
+  fun image_from_image = ImageFromImage(image : Image, rec : Rectangle) : Image # create an image from another image piece
   fun image_to_pot = ImageToPOT(image : Image*, fill_color : Color) : Void      # convert image to pot (power-of-two)
   fun image_format = ImageFormat(image : Image*, new_format : LibC::Int) : Void # convert image data to desired format
   fun image_alpha_mask = ImageAlphaMask(image : Image*, alpha_mask : Image) : Void

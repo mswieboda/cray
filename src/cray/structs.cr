@@ -78,10 +78,11 @@ lib LibRay
     advance_x : LibC::Int # character advance position X
   end
 
-  struct SpriteFont
-    texture : Texture2D     # font texture
+  struct Font
     base_size : LibC::Int   # base size (default chars height)
     chars_count : LibC::Int # number of characters
+    texture : Texture2D     # characters texture atlas
+    recs : Rectangle*       # characters rectangles in texture
     chars : CharInfo*       # characters info data
   end
 

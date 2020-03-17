@@ -27,10 +27,10 @@ lib LibRay
   fun image_resize = ImageResize(image : Image*, new_width : LibC::Int, new_height : LibC::Int)      # resize an image (bilinear filtering)
   fun image_resize_nn = ImageResizeNN(image : Image*, new_width : LibC::Int, new_height : LibC::Int) # resize an image (nearest-neighbors scaling algorithm)
   fun image_text = ImageText(text : LibC::Char*, font_size : LibC::Int, color : Color) : Image       # create an image from text (default font)
-  fun image_text_ex = ImageTextEx(font : SpriteFont, text : LibC::Char*, font_size : LibC::Int, spacing : LibC::Int, tint : Color) : Void
+  fun image_text_ex = ImageTextEx(font : Font, text : LibC::Char*, font_size : LibC::Int, spacing : LibC::Int, tint : Color) : Void
   fun image_draw = ImageDraw(dst : Image*, src : Image, src_rec : Rectangle, dst_rec : Rectangle) : Void
   fun image_draw_text = ImageDrawText(dst : Image*, position : Vector2, text : LibC::Char*, font_size : LibC::Int, color : Color) : Void
-  fun image_draw_text_ex = ImageDrawTextEx(dst : Image*, position : Vector2, font : SpriteFont, text : LibC::Char*, font_size : LibC::Int, spacing : LibC::Int, color : Color) : Void
+  fun image_draw_text_ex = ImageDrawTextEx(dst : Image*, position : Vector2, font : Font, text : LibC::Char*, font_size : LibC::Int, spacing : LibC::Int, color : Color) : Void
   fun image_flip_vertical = ImageFlipVertical(image : Image*) : Void
   fun image_flip_horizontal = ImageFlipHorizontal(image : Image*) : Void
   fun image_color_tint = ImageColorTint(image : Image*, color : Color) : Void

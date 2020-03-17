@@ -9,20 +9,20 @@ TEXT = "Hello, world!"
 
 while !LibRay.window_should_close?
   LibRay.begin_drawing
-  LibRay.clear_background LibRay::WHITE
+  LibRay.clear_background(LibRay::BLACK)
 
   w = LibRay.get_screen_width
   h = LibRay.get_screen_height
 
-  font_size = Math.min(w, h) * 0.2
-  spacing = font_size/10
+  font_size = 20
+  spacing = 10
 
-  text_size = LibRay.measure_text_ex LibRay.get_default_font, TEXT, font_size, spacing
+  text_size = LibRay.measure_text_ex(LibRay.get_font_default, TEXT, font_size, spacing)
 
-  x = w/2.0 - text_size.x/2.0
-  y = h/2.0 - text_size.y/2.0
+  x = w / 2.0 - text_size.x
+  y = h / 2.0 - text_size.y
 
-  LibRay.draw_text_ex LibRay.get_default_font, TEXT, LibRay::Vector2.new(x: x, y: y), font_size, spacing, LibRay::BLACK
+  LibRay.draw_text_ex(LibRay.get_font_default, TEXT, LibRay::Vector2.new(x: x, y: y), font_size, spacing, LibRay::GREEN)
 
   LibRay.end_drawing
 end

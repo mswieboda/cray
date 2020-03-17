@@ -22,9 +22,9 @@ while !LibRay.window_should_close?
 
   LibRay.draw_fps 0, 0
 
-  text_size = LibRay.measure_text_ex LibRay.get_default_font, TEXT, FONT_SIZE, FONT_SIZE/10.0
+  text_size = LibRay.measure_text_ex LibRay.get_font_default, TEXT, FONT_SIZE, FONT_SIZE/10.0
   LibRay.draw_text_ex(
-    LibRay.get_default_font,
+    LibRay.get_font_default,
     TEXT,
     LibRay::Vector2.new(
       x: SCREEN_WIDTH - text_size.x,

@@ -15,6 +15,7 @@ while !LibRay.window_should_close?
   screen_height = LibRay.get_screen_height
 
   if texture
+    texture = texture.as(LibRay::Texture2D)
     LibRay.draw_texture texture, screen_width/2 - texture.width/2, screen_height/2 - texture.height/2, LibRay::WHITE
 
     if {

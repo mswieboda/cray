@@ -23,7 +23,11 @@ libraylib.so # (TBD: need to compile and add to repo)
 libraylib.dylib
 ```
 
-`*.dylib` is used for MacOS, while `*.so` will be for Linux. Regardless of the platform, prepending with `env LIBRARY_PATH="$(PWD)/lib_ext"` will pick the correct folder to use the library.
+`*.dylib` is used for MacOS, while `*.so` will be for Linux.
+
+TODO: will try to have MacOS compile to `*.so` as well so only one file is needed regardless of platform.
+
+Use these environment variables to load the library when building or running your project:
 
 Building:
 

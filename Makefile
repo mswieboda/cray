@@ -1,15 +1,16 @@
 all: examples
 
 lib_ext: raylib
-	rm -rf lib_ext; \
-	mkdir -p lib_ext; \
+	rm -rf lib_ext ;\
+	mkdir -p lib_ext ;\
 	cd raylib ;\
 	rm -rf build ;\
 	mkdir -p build ;\
 	cd build ;\
 	cmake -DBUILD_EXAMPLES=OFF -DBUILD_GAMES=OFF -DSHARED_RAYLIB=ON .. ;\
 	make
-	cp raylib/build/src/libraylib.* ./lib_ext
+	cp ./raylib/build/src/libraylib.*.so ./lib_ext
+	cp ./raylib/build/src/libraylib.*.dylib ./lib_ext
 
 example_hello_world: lib_ext examples/hello_world/hello_world.cr
 	mkdir -p build-examples

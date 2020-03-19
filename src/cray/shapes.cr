@@ -8,28 +8,40 @@ lib LibRay
   fun draw_line = DrawLine(start_pos_x : LibC::Int, start_pos_y : LibC::Int, end_pos_x : LibC::Int, end_pos_y : LibC::Int, color : Color) : Void
   fun draw_line_v = DrawLineV(start_pos : Vector2, end_pos : Vector2, color : Color) : Void
   fun draw_line_bezier = DrawLineBezier(start_pos : Vector2, end_pos : Vector2, thick : LibC::Float, color : Color) : Void
+  fun draw_line_strip = DrawLineStrip(points : Vector2*, num_points : LibC::Int, color : Color) : Void
 
   fun draw_circle = DrawCircle(center_x : LibC::Int, center_y : LibC::Int, radius : LibC::Float, color : Color) : Void
+  fun draw_circle_sector = DrawCircleSector(center_x : LibC::Int, center_y : LibC::Int, radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
+  fun draw_circle_sector_lines = DrawCircleSectorLines(center_x : LibC::Int, center_y : LibC::Int, radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
   fun draw_circle_gradient = DrawCircleGradient(center_x : LibC::Int, center_y : LibC::Int, radius : LibC::Float, color1 : Color, color2 : Color) : Void
   fun draw_circle_v = DrawCircleV(center : Vector2, radius : LibC::Float, color : Color) : Void
   fun draw_circle_lines = DrawCircleLines(center_x : LibC::Int, center_y : LibC::Int, radius : LibC::Float, color : Color) : Void
 
+  fun draw_ellipse = DrawEllipse(center_x : LibC::Int, center_y : LibC::Int, radius_h : LibC::Float, radius_v : LibC::Float, color : Color) : Void
+  fun draw_ellipse_lines = DrawEllipseLines(center_x : LibC::Int, center_y : LibC::Int, radius_h : LibC::Float, radius_v : LibC::Float, color : Color) : Void
+
+  fun draw_ring = DrawRing(center : Vector2, inner_radius : LibC::Float, outer_radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
+  fun draw_ring_lines = DrawRing(center : Vector2, inner_radius : LibC::Float, outer_radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
+
   fun draw_rectangle = DrawRectangle(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color : Color) : Void
+  fun draw_rectangle_v = DrawRectangleV(position : Vector2, size : Vector2, color : Color) : Void
   fun draw_rectangle_rec = DrawRectangleRec(rec : Rectangle, color : Color) : Void
   fun draw_rectangle_pro = DrawRectanglePro(rec : Rectangle, origin : Vector2, rotation : LibC::Float, color : Color) : Void
   fun draw_rectangle_gradient_v = DrawRectangleGradientV(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color1 : Color, color2 : Color) : Void
   fun draw_rectangle_gradient_h = DrawRectangleGradientH(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color1 : Color, color2 : Color) : Void
   fun draw_rectangle_gradient_ex = DrawRectangleGradientEx(rec : Rectangle, color1 : Color, color2 : Color, color3 : Color, color4 : Color) : Void
-  fun draw_rectangle_v = DrawRectangleV(position : Vector2, size : Vector2, color : Color) : Void
   fun draw_rectangle_lines = DrawRectangleLines(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color : Color) : Void
-  fun draw_rectangle_t = DrawRectangleT(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color : Color) : Void
+  fun draw_rectangle_lines_ex = DrawRectangleLinesEx(rec : Rectangle, line_thick : LibC::Int, color : Color) : Void
+  fun draw_rectangle_rounded = DrawRectangleRounded(rec : Rectangle, roundness : LibC::Float, segments : LibC::Int, color : Color) : Void
+  fun draw_rectangle_rounded_lines = DrawRectangleRoundedLines(rec : Rectangle, roundness : LibC::Float, segments : LibC::Int, line_thick : LibC::Int, color : Color) : Void
 
   fun draw_triangle = DrawTriangle(v1 : Vector2, v2 : Vector2, v3 : Vector2, color : Color) : Void
   fun draw_triangle_lines = DrawTriangleLines(v1 : Vector2, v2 : Vector2, v3 : Vector2, color : Color) : Void
+  fun draw_triangle_fan = DrawTriangleFan(points : Vector2*, num_points : LibC::Int, color : Color) : Void
+  fun draw_triangle_strip = DrawTriangleStrip(points : Vector2*, points_count : LibC::Int, color : Color) : Void
 
   fun draw_poly = DrawPoly(center : Vector2, sides : LibC::Int, radius : LibC::Float, rotation : LibC::Float, color : Color) : Void
-  fun draw_poly_ex = DrawPolyEx(points : Vector2*, num_points : LibC::Int, color : Color) : Void
-  fun draw_poly_ex_lines = DrawPolyExLines(points : Vector2*, num_points : LibC::Int, color : Color) : Void
+  fun draw_poly_lines = DrawPolyLines(center : Vector2, sides : LibC::Int, radius : LibC::Float, rotation : LibC::Float, color : Color) : Void
 
   # basic shapes collision detection functions
   fun check_collision_recs = CheckCollisionRecs(rec1 : Rectangle, rec2 : Rectangle) : Bool

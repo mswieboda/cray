@@ -12,6 +12,13 @@ lib LibRay
     z : LibC::Float
   end
 
+  struct Vector4
+    x : LibC::Float
+    y : LibC::Float
+    z : LibC::Float
+    w : LibC::Float
+  end
+
   struct Matrix
     m0 : LibC::Float
     m4 : LibC::Float
@@ -86,12 +93,17 @@ lib LibRay
     chars : CharInfo*       # characters info data
   end
 
-  struct Camera
+  alias SpriteFont = Font
+
+  struct Camera3D
     position : Vector3 # camera position
     target : Vector3   # camera target it looks-at
     up : Vector3       # camera up vector (rotation over its axis)
-    fovy : LibC::Float # camera field-of-view apperture in Y (degrees)
+    fovy : LibC::Float # camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
+    type : LibC::Int   # camera type, defines projection type: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
   end
+
+  alias Camera = Camera3D
 
   struct Camera2D
     offset : Vector2       # camera offset (displacement from target)

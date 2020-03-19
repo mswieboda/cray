@@ -3,19 +3,34 @@ require "./structs"
 lib LibRay
   # window related functions
   fun init_window = InitWindow(width : LibC::Int, height : LibC::Int, title : LibC::Char*) : Void
-  fun close_window = CloseWindow : Void
   fun window_should_close? = WindowShouldClose : Bool
+  fun close_window = CloseWindow : Void
+  fun window_ready? = IsWindowReady : Bool
   fun window_minimized? = IsWindowMinimized : Bool
+  fun window_resized? = IsWindowResized : Bool
+  fun window_hidden? = IsWindowHidden : Bool
   fun toggle_fullscreen = ToggleFullscreen : Void
+  fun unhide_window = UnhideWindow : Void
+  fun hide_window = HideWindow : Void
 
   fun set_window_icon = SetWindowIcon(image : Image) : Void
   fun set_window_title = SetWindowTitle(title : LibC::Char*) : Void
   fun set_window_position = SetWindowPosition(x : LibC::Int, y : LibC::Int) : Void
   fun set_window_monitor = SetWindowMonitor(monitor : LibC::Int) : Void
   fun set_window_min_size = SetWindowMinSize(width : LibC::Int, height : LibC::Int) : Void
+  fun set_window_size = SetWindowSize(width : LibC::Int, height : LibC::Int) : Void
 
   fun get_screen_width = GetScreenWidth : LibC::Int
   fun get_screen_height = GetScreenHeight : LibC::Int
+  fun get_monitor_count = GetMonitorCount : LibC::Int
+  fun get_monitor_width = GetMonitorWidth(monitor : LibC::Int) : LibC::Int
+  fun get_monitor_height = GetMonitorHeight(monitor : LibC::Int) : LibC::Int
+  fun get_monitor_physical_width = GetMonitorPhysicalWidth(monitor : LibC::Int) : LibC::Int
+  fun get_monitor_physical_height = GetMonitorPhysicalHeight(monitor : LibC::Int) : LibC::Int
+  fun get_window_position = GetWindowPosition : Vector2
+  fun get_monitor_name = GetMonitorName(monitor : LibC::Int) : LibC::Char*
+  fun get_clipboard_text = GetClipboardText : LibC::Char*
+  fun set_clipboard_text = SetClipboardText(text : LibC::Char*) : Void
 
   # cursor related functions
   fun show_cursor = ShowCursor : Void
@@ -28,56 +43,76 @@ lib LibRay
   fun clear_background = ClearBackground(color : Color) : Void
   fun begin_drawing = BeginDrawing : Void
   fun end_drawing = EndDrawing : Void
-  fun begin_2d_mode = Begin2dMode(camera : Camera2D) : Void
-  fun end_2d_mode = End2dMode : Void
-  fun begin_3d_mode = Begin3dMode(camera : Camera) : Void
-  fun end_3d_mode = End3dMode : Void
+  fun begin_mode_2d = BeginMode2D(camera : Camera2D) : Void
+  fun end_mode_2d = EndMode2D : Void
+  fun begin_mode_3d = BeginMode3D(camera : Camera3D) : Void
+  fun end_mode_3d = EndMode3D : Void
   fun begin_texture_mode = BeginTextureMode(target : RenderTexture2D) : Void
   fun end_texture_mode = EndTextureMode : Void
+  fun begin_scissor_mode = BeginScissorMode(x : LibC::Int, y : LibC::Int, width : LibC::Int, height : LibC::Int) : Void
+  fun end_scissor_mode = EndScissorMode : Void
 
   # screen space related functions
   fun get_mouse_ray = GetMouseRay(mouse_position : Vector2, camera : Camera) : Ray
-  fun get_world_to_screen = GetWorldToScreen(position : Vector3, camera : Camera) : Vector2
   fun get_camera_matrix = GetCameraMatrix(camera : Camera) : Matrix
+  fun get_camera_matrix_2d = GetCameraMatrix2D(camera : Camera2D) : Matrix
+  fun get_world_to_screen = GetWorldToScreen(position : Vector3, camera : Camera) : Vector3
+  fun get_world_to_screen_ex = GetWorldToScreenEx(position : Vector3, camera : Camera, width : LibC::Int, height : LibC::Int) : Vector3
+  fun get_world_to_screen_2d = GetWorldToScreen2D(position : Vector2, camera : Camera2D) : Vector2
+  fun get_screen_to_world_2d = GetScreenToWorld2D(position : Vector2, camera : Camera2D) : Vector2
 
   # timing related functions
   fun set_target_fps = SetTargetFPS(fps : LibC::Int) : Void
   fun get_fps = GetFPS : LibC::Int
   fun get_frame_time = GetFrameTime : LibC::Float
+  fun get_time = GetTime : LibC::Double
 
   # color related functions
-  fun get_hex_value = GetHexValue(color : Color) : LibC::Int
+  fun color_to_int = ColorToInt(color : Color) : LibC::Int
+  fun color_normalize = ColorNormalize(color : Color) : Vector4
+  fun color_from_normalized = ColorFromNormalized(normalized : Vector4) : Color
+  fun color_to_hsv = ColorToHSV(color : Color) : Vector3
+  fun color_from_hsv = ColorFromHSV(hsv : Vector3) : Color
   fun get_color = GetColor(hex_value : LibC::Int) : Color
   fun fade = Fade(color : Color, alpha : LibC::Float) : Color
-  fun color_to_float = ColorToFloat(color : Color) : LibC::Float* # converts color to float array and normalizes
 
-  # math useful functions
-  fun vector_to_float = VectorToFloat(vec : Vector3) : LibC::Float* # returns vector as float array
-  fun matrix_to_float = MatrixToFloat(mat : Matrix) : LibC::Float*  # returns matrix as float array
-  fun vector_3_zero = Vector3Zero : Vector3                         # vector with components value 0
-  fun vector_3_one = Vector3One : Vector3                           # vector with components value 1
-  fun matrix_identity = MatrixIdentity : Matrix
-
-  # misc functions
-  fun show_logo = ShowLogo : Void                                                     # activate raylib logo on startup
-  fun set_config_flags = SetConfigFlags(flags : UInt8) : Void                         # setup window configuration flags (view FLAG_* in constants.cr)
+  # misc functions                         # activate raylib logo on startup
+  fun set_config_flags = SetConfigFlags(flags : UInt8) : Void # setup window configuration flags (view FLAG_* in constants.cr)
+  fun set_trace_log_level = SetTraceLogLevel(log_type : LibC::Int) : Void
+  fun set_trace_log_ext = SetTraceLogExt(log_type : LibC::Int) : Void
+  # fun set_trace_log_callback = SetTraceLogCallback(callback : TraceLogCallback) : Void # NOTE: not implemented, not sure on TraceLogCallback in structs.cr
   fun trace_log = TraceLog(log_type : LibC::Int, text : LibC::Char*) : Void           # show trace log messages (INFO, WARNING, ERROR, DEBUG)
   fun take_screenshot = TakeScreenshot(filename : LibC::Char*) : Void                 # takes a screenshot of current screen (saved a .png)
   fun get_random_value = GetRandomValue(min : LibC::Int, max : LibC::Int) : LibC::Int # returns a random value between min and max (both included)
 
   # files management functions
+  fun load_file_data = LoadFileData(filename : LibC::Char*, bytes_read : LibC::Int*) : LibC::Char*
+  fun save_file_data = SaveFileData(filename : LibC::Char*, data : Void*, bytes_to_write : LibC::Int) : Void
+  fun file_exists? = FileExists(filename : LibC::Char*) : Bool
   fun file_extension? = IsFileExtension(filename : LibC::Char*, ext : LibC::Char*) : Bool # check file extension
+  fun directory_exists? = DirectoryExists(dir_path : LibC::Char*) : Bool
   fun get_extension = GetExtension(filename : LibC::Char*) : LibC::Char*
-  fun get_directory_path = GetDirectoryPath(filename : LibC::Char*) : LibC::Char*
+  fun get_filename = GetFileName(file_path : LibC::Char*) : LibC::Char*
+  fun get_filename_without_ext = GetFileNameWithoutExt(file_path : LibC::Char*) : LibC::Char*
+  fun get_directory_path = GetDirectoryPath(file_path : LibC::Char*) : LibC::Char*
+  fun get_prev_directory_path = GetPrevDirectoryPath(filename : LibC::Char*) : LibC::Char*
   fun get_working_directory = GetWorkingDirectory : LibC::Char*
-  fun change_directory = ChangeDirectory(dir : LibC::Char*) : Bool           # change working directory, returns true if success
-  fun file_dropped? = IsFileDropped : Bool                                   # checks if a file has been dropped into window
-  fun get_dropped_files = GetDroppedFiles(count : LibC::Int*) : LibC::Char** # get dropped files names
-  fun clear_dropped_files = ClearDroppedFiles : Void                         # clear dropped files paths buffer
+  fun get_directory_files = GetDirectoryFiles(dir_path : LibC::Char*, count : LibC::Int*) : LibC::Char** # get filenames in a directory path (memory should be freed)
+  fun clear_directory_files = ClearDirectoryFiles : Void                                                 # clear directory files paths buffers (free memory)
+  fun change_directory = ChangeDirectory(dir : LibC::Char*) : Bool                                       # change working directory, returns true if success
+  fun file_dropped? = IsFileDropped : Bool                                                               # checks if a file has been dropped into window
+  fun get_dropped_files = GetDroppedFiles(count : LibC::Int*) : LibC::Char**                             # get dropped files names
+  fun clear_dropped_files = ClearDroppedFiles : Void                                                     # clear dropped files paths buffer
+  fun get_file_mod_time = GetFileModTime(filename : LibC::Char*) : LibC::Long                            # get file modification time (last write time)
+
+  fun compress_data = CompressData(data : LibC::Char*, data_length : LibC::Int, comp_data_length : LibC::Int*) : LibC::Char*
+  fun decompress_data = CompressData(comp_data : LibC::Char*, comp_data_length : LibC::Int, data_length : LibC::Int*) : LibC::Char*
 
   # persistent storage management
-  fun storage_save_value = StorageSaveValue(position : LibC::Int, value : LibC::Int) : Void # save integer value to storage file (to defined position)
   fun storage_load_value = StorageLoadValue(position : LibC::Int) : LibC::Int               # load integer value from storage file (from defined position)
+  fun storage_save_value = StorageSaveValue(position : LibC::Int, value : LibC::Int) : Void # save integer value to storage file (to defined position)
+
+  fun open_url = OpenURL(url : LibC::Char*) : Void
 
   # input related functions: keyboard
   fun key_pressed? = IsKeyPressed(key : LibC::Int) : Bool
@@ -107,12 +142,15 @@ lib LibRay
   fun get_mouse_x = GetMouseX : LibC::Int
   fun get_mouse_y = GetMouseY : LibC::Int
   fun get_mouse_position = GetMousePosition : Vector2
-  fun set_mouse_position = SetMousePosition(position : Vector2) : Void
+  fun set_mouse_position = SetMousePosition(x : LibC::Int, y : LibC::Int) : Void
+  fun set_mouse_offset = SetMouseOffset(offset_x : LibC::Int, offset_y : LibC::Int) : Void
+  fun set_mouse_scale = SetMouseScale(scale_x : LibC::Int, scale_y : LibC::Int) : Void
   fun get_mouse_wheel_move = GetMouseWheelMove : LibC::Int
 
   # input related functions: touch
   fun get_touch_x = GetTouchX : LibC::Int
   fun get_touch_y = GetTouchY : LibC::Int
+  fun get_touch_position = GetTouchPosition(index : LibC::Int) : Vector2
 
   # gestures related functions
   fun set_gestures_enabled = SetGesturesEnabled(gesture_flags : LibC::UInt) : Void

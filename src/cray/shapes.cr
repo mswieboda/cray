@@ -21,7 +21,7 @@ lib LibRay
   fun draw_ellipse_lines = DrawEllipseLines(center_x : LibC::Int, center_y : LibC::Int, radius_h : LibC::Float, radius_v : LibC::Float, color : Color) : Void
 
   fun draw_ring = DrawRing(center : Vector2, inner_radius : LibC::Float, outer_radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
-  fun draw_ring_lines = DrawRing(center : Vector2, inner_radius : LibC::Float, outer_radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
+  fun draw_ring_lines = DrawRingLines(center : Vector2, inner_radius : LibC::Float, outer_radius : LibC::Float, start_angle : LibC::Int, end_angle : LibC::Int, segments : LibC::Int, color : Color) : Void
 
   fun draw_rectangle = DrawRectangle(pos_x : LibC::Int, pos_y : LibC::Int, width : LibC::Int, height : LibC::Int, color : Color) : Void
   fun draw_rectangle_v = DrawRectangleV(position : Vector2, size : Vector2, color : Color) : Void

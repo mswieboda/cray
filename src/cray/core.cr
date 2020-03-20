@@ -120,7 +120,7 @@ lib LibRay
   fun key_released? = IsKeyReleased(key : LibC::Int) : Bool
   fun key_up? = IsKeyUp(key : LibC::Int) : Bool
   fun get_key_pressed = GetKeyPressed : LibC::Int
-  fun set_exit_key(key : LibC::Int) : Void # set a custom key to exit program (default is ESC)
+  fun set_exit_key = SetExitKey(key : LibC::Int) : Void # set a custom key to exit program (default is ESC)
 
   # input related functions: gamepad
   fun gamepad_available? = IsGamepadAvailable(gamepad : LibC::Int) : Bool

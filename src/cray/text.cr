@@ -13,6 +13,6 @@ lib LibRay
   fun draw_text_ex = DrawTextEx(font : Font, text : LibC::Char*, position : Vector2, font_size : LibC::Float, spacing : LibC::Float, tint : Color)
 
   # text misc. functions
-  fun measure_text = MeasureText(text : LibC::Char*, font_size : LibC::Int) : LibC::Int                                        # measure string width for default font
-  fun measure_text_ex = MeasureTextEx(font : Font, text : LibC::Char*, font_size : LibC::Float, spacing : LibC::Int) : Vector2 # measure string size for spritefont
+  fun measure_text = MeasureText(text : LibC::Char*, font_size : LibC::Int) : LibC::Int                                          # measure string width for default font
+  fun measure_text_ex = MeasureTextEx(font : Font, text : LibC::Char*, font_size : LibC::Float, spacing : LibC::Float) : Vector2 # measure string size for font
 end

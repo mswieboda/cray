@@ -19,8 +19,8 @@ while !LibRay.window_should_close?
 
   text_size = LibRay.measure_text_ex(LibRay.get_font_default, TEXT, font_size, spacing)
 
-  x = w / 2.0 - text_size.x
-  y = h / 2.0 - text_size.y
+  x = w / 2.0 - text_size.x / 2.0
+  y = h / 2.0 - text_size.y / 2.0
 
   LibRay.draw_text_ex(LibRay.get_font_default, TEXT, LibRay::Vector2.new(x: x, y: y), font_size, spacing, LibRay::GREEN)
 

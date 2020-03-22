@@ -49,10 +49,10 @@ lib LibRay
   end
 
   struct Rectangle
-    x : LibC::Int
-    y : LibC::Int
-    width : LibC::Int
-    height : LibC::Int
+    x : LibC::Float
+    y : LibC::Float
+    width : LibC::Float
+    height : LibC::Float
   end
 
   struct Image

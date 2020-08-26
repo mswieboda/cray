@@ -176,22 +176,29 @@ lib LibRay
     data : Void*              # buffer data pointer
   end
 
-  struct Sound
-    source : LibC::UInt # openal audio source id
-    buffer : LibC::UInt # openal audio buffer id
-    format : LibC::Int  # openal audio format specifier
-  end
-
-  type Music = Void*
-
   struct AudioStream
     sample_rate : LibC::UInt # frequency (samples per second)
     sample_size : LibC::UInt # bit depth (bits per sample): 8, 16, 32 (24 not supported)
     channels : LibC::UInt    # number of channels (1-mono, 2-stereo)
 
-    format : LibC::Int      # openal audio format specifier
-    source : LibC::UInt     # openal audio source id
-    buffers : LibC::UInt[2] # openal audio buffers (double buffering)
+    buffer : AudioBuffer*   # pointer to internal data used by the audio system
+  end
+
+  type AudioBuffer = Void*
+
+  struct Sound
+    sample_count : LibC::UInt # total number of samples
+    stream : AudioStream      # audio stream
+  end
+
+  struct Music
+    ctx_type : LibC::Int      # type of music context (audio filetype)
+    ctx_data : Void*          # audio context data, depends on type
+
+    sample_count : LibC::UInt # total number of samples
+    loop_count : LibC::UInt   # loops count (times music will play)
+
+    stream : AudioStream      # audio stream
   end
 
   struct RRESData

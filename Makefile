@@ -24,6 +24,10 @@ example_input: lib_ext examples/input/input.cr examples/input/circle.png
 	mkdir -p build-examples
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/input/input.cr -o build-examples/input
 
+example_sound: lib_ext examples/sound/sound.cr
+	mkdir -p build-examples
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/sound/sound.cr -o build-examples/sound
+
 run_example_hello_world: example_hello_world
 	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/hello_world
 
@@ -33,6 +37,9 @@ run_example_image_effects: example_image_effects
 run_example_input: example_input
 	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/input
 
-examples: example_hello_world example_image_effects example_input
+run_example_sound: example_sound
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" build-examples/sound
 
-run_examples: run_example_hello_world run_example_image_effects run_example_input
+examples: example_hello_world example_image_effects example_input example_sound
+
+run_examples: run_example_hello_world run_example_image_effects run_example_input run_example_sound

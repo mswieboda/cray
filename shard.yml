@@ -2,7 +2,9 @@ name: cray
 version: 0.1.0
 
 authors:
+  - Matt Swieboda <msweibod@gmail.com>
   - Zatherz <zatherz@linux.pl>
+  - Chance Snow <hello@chancesnow.me>
 
 crystal: 0.33.0
 
@@ -12,4 +14,4 @@ scripts:
   postinstall: "cp -r ./lib_ext ../.."
 
 libraries:
-  libraylib: 2.6
+  libraylib: 3.0

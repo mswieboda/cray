@@ -1,6 +1,8 @@
 # cray
 
-Complete [RayLib](http://raylib.com) bindings to Crystal.
+Complete [RayLib](http://raylib.com) 2.6 bindings to Crystal. 
+
+Original [GitLab cray repo](https://gitlab.com/Zatherz/cray) created/maintained by [Zatherz](https://gitlab.com/Zatherz) with RayLib 1.8 bindings
 
 ## Installation
 

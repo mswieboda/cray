@@ -9,7 +9,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   cray:
-    gitlab: mswieboda/cray
+    github: mswieboda/cray
 ```
 
 The [RayLib](http://raylib.com) libraries are copied to your projects `lib_ext` folder.

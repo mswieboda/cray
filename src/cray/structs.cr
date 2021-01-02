@@ -19,6 +19,8 @@ lib LibRay
     w : LibC::Float
   end
 
+  alias Quaternion = Vector4
+
   struct Matrix
     m0 : LibC::Float
     m4 : LibC::Float
@@ -129,13 +131,18 @@ lib LibRay
     colors : UInt8*           # vertex colors (rgba - 4 components per vertex) (shader-location = 3)
     indices : LibC::UShort*   # vertex indices (in case vertex data comes indexed)
 
+    anim_vertices : LibC::Float* # animated vertex positions (after bones transformations)
+    anim_normals : LibC::Float* # animated normals (after bones transformations)
+    bone_ids : LibC::Int* # vertex bone ids, up to 4 bones influence by vertex (skinning)
+    bone_weights : LibC::Float* # vertex bone weight, up to 4 bones influence by vertex (skinning)
+
     vao_id : LibC::UInt    # opengl vertex array object id
-    vbo_id : LibC::UInt[7] # opengl vertex buffer objects id (7 types of vertex data)
+    vbo_id : LibC::UInt* # opengl vertex buffer objects id (default vertex data)
   end
 
   struct Shader
-    id : LibC::UInt                        # shader program id
-    locs : LibC::Int[MAX_SHADER_LOCATIONS] # shader locations array
+    id : LibC::UInt # shader program id
+    locs : LibC::Int* # shader locations array
   end
 
   struct MaterialMap
@@ -145,15 +152,39 @@ lib LibRay
   end
 
   struct Material
-    shader : Shader                       # material shader
-    maps : MaterialMap[MAX_MATERIAL_MAPS] # material maps
-    params : LibC::Float*                 # material generic parameters (if required)
+    shader : Shader       # material shader
+    maps : MaterialMap*   # material maps
+    params : LibC::Float* # material generic parameters (if required)
+  end
+
+  struct Transform
+    translation : Vector3
+    rotation : Quaternion
+    scale : Vector3
+  end
+
+  struct BoneInfo
+    name : Int8[32]
+    parent : LibC::Int
   end
 
   struct Model
-    mesh : Mesh         # vertex data buffers (ram and vram)
     transform : Matrix  # local transform matrix
-    material : Material # shader and textures data
+    mesh_count : LibC::Int
+    meshes : Mesh*         # vertex data buffers (ram and vram)
+    material_count : LibC::Int
+    materials : Material* # shader and textures data
+    mesh_material : LibC::Int*
+    bone_count : LibC::Int
+    bones : BoneInfo* # bones information (skeleton)
+    bind_pose : Transform # bones base transformation (pose)
+  end
+
+  struct ModelAnimation
+    bone_count : LibC::Int    # number of bones
+    bones : BoneInfo*         # bones information (skeleton)
+    frame_count : LibC::Int   # number of animation frames
+    frame_poses : Transform** # poses array by frame
   end
 
   struct Ray

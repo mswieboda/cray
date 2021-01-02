@@ -29,7 +29,7 @@ lib LibRay
 
   # mesh generation functions
   fun gen_mesh_plane = GenMeshPlane(width : LibC::Float, length : LibC::Float, res_x : LibC::Int, res_z : LibC::Int) : Mesh
-  fun gen_mesh_cube = GenMeshCube(width : LibC::Float, height : LibC::Float, lenght : LibC::Float) : Mesh
+  fun gen_mesh_cube = GenMeshCube(width : LibC::Float, height : LibC::Float, length : LibC::Float) : Mesh
   fun gen_mesh_sphere = GenMeshSphere(radius : LibC::Float, rings : LibC::Int, slices : LibC::Int) : Mesh
   fun gen_mesh_hemi_sphere = GenMeshHemiSphere(radius : LibC::Float, rings : LibC::Int, slices : LibC::Int) : Mesh
   fun gen_mesh_cylinder = GenMeshCylinder(radius : LibC::Float, height : LibC::Float, slices : LibC::Int) : Mesh
@@ -42,6 +42,8 @@ lib LibRay
   fun load_material = LoadMaterial(filename : LibC::Char*) : Material
   fun load_material_default = LoadMaterialDefault : Material
   fun unload_material = UnloadMaterial(material : Material) : Void
+  fun set_material_texture = SetMaterialTexture(material : Material*, map_type : LibC::Int, texture : Texture2D) : Void
+  fun set_model_mesh_material = SetModelMeshMaterial(model : Model*, mesh_id : LibC::Int, material_id : LibC::Int) : Void
 
   # model drawing functions
   fun draw_model = DrawModel(model : Model, position : Vector3, scale : LibC::Float, tint : Color) : Void

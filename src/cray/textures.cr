@@ -29,9 +29,10 @@ lib LibRay
   fun image_crop = ImageCrop(image : Image*, crop : Rectangle) : Void
   fun image_resize = ImageResize(image : Image*, new_width : LibC::Int, new_height : LibC::Int)      # resize an image (bilinear filtering)
   fun image_resize_nn = ImageResizeNN(image : Image*, new_width : LibC::Int, new_height : LibC::Int) # resize an image (nearest-neighbors scaling algorithm)
+  fun image_resize_canvas = ImageResizeCanvas(image : Image*, new_width : LibC::Int, new_height : LibC::Int, offset_x : LibC::Int, offset_y : LibC::Int, color : Color) : Void # resize canvas and fill with color
   fun image_text = ImageText(text : LibC::Char*, font_size : LibC::Int, color : Color) : Image       # create an image from text (default font)
   fun image_text_ex = ImageTextEx(font : Font, text : LibC::Char*, font_size : LibC::Float, spacing : LibC::Float, tint : Color) : Image
-  fun image_draw = ImageDraw(dst : Image*, src : Image, src_rec : Rectangle, dst_rec : Rectangle) : Void
+  fun image_draw = ImageDraw(dst : Image*, src : Image, src_rec : Rectangle, dst_rec : Rectangle, tint : Color) : Void
   fun image_draw_text = ImageDrawText(dst : Image*, position : Vector2, text : LibC::Char*, font_size : LibC::Int, color : Color) : Void
   fun image_draw_text_ex = ImageDrawTextEx(dst : Image*, position : Vector2, font : Font, text : LibC::Char*, font_size : LibC::Float, spacing : LibC::Float, color : Color) : Void
   fun image_flip_vertical = ImageFlipVertical(image : Image*) : Void
@@ -43,6 +44,7 @@ lib LibRay
   fun image_color_brightness = ImageColorBrightness(image : Image*, brightness : LibC::Int) : Void
 
   # image generation functions
+  fun gen_image_color = GenImageColor(width : LibC::Int, height : LibC::Int, color : Color) : Image
   fun gen_image_gradient_v = GenImageGradientV(width : LibC::Int, height : LibC::Int, top : Color, bottom : Color) : Image
   fun gen_image_gradient_h = GenImageGradientH(width : LibC::Int, height : LibC::Int, left : Color, right : Color) : Image
   fun gen_image_gradient_radial = GenImageGradientRadial(width : LibC::Int, height : LibC::Int, density : LibC::Float, inner : Color, outer : Color) : Image

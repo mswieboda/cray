@@ -1,10 +1,11 @@
 name: cray
-version: 0.1.3
+version: 0.1.4
 
 authors:
   - Zatherz <zatherz@linux.pl>
+  - Matt Swieboda <mswieboda@users.noreply.github.com>
 
-crystal: 0.35.1
+crystal: 0.36.0
 
 license: MIT
 
